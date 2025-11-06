@@ -23,7 +23,7 @@
       overflow: hidden;
     }
 
-    /* Curtains */
+    /* Curtain */
     .curtain {
       position: fixed;
       inset: 0 50% 0 auto;
@@ -135,30 +135,6 @@
     }
     .btn:hover { background: #ffe4e1; }
 
-    /* Petals */
-    .petals {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 20;
-      overflow: hidden;
-    }
-
-    .petal {
-      position: absolute;
-      width: 35px;
-      height: 35px;
-      background-image: url('https://i.imgur.com/Y9v8yWJ.png');
-      background-size: cover;
-      opacity: 0.9;
-      animation: fallPetal linear forwards;
-    }
-
-    @keyframes fallPetal {
-      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(110vh) rotate(720deg); opacity: 0.4; }
-    }
-
     /* Responsive */
     @media (max-width: 900px) {
       .wrap {
@@ -172,14 +148,18 @@
   </style>
 </head>
 <body>
+  <!-- Curtains -->
   <div class="curtain"></div>
   <div class="curtain right"></div>
 
+  <!-- Main Content -->
   <div class="wrap">
+    <!-- Invitation Card -->
     <div class="card" id="card">
       <img src="Invitation.png" alt="Invitation Card">
     </div>
 
+    <!-- Parents Frame -->
     <div class="frame" id="frame">
       <div class="mat">
         <img src="parents.jpg" alt="Parents Photo">
@@ -187,43 +167,27 @@
     </div>
   </div>
 
+  <!-- Button -->
   <div class="controls">
     <a class="btn" target="_blank"
        href="https://www.google.com/maps?q=16.721779173427123,78.00999461311117">📍 Open in Maps</a>
   </div>
 
+  <!-- Music -->
   <audio id="bgMusic" loop>
     <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0c9cb8d91d.mp3?filename=soft-flute-background-110734.mp3" type="audio/mpeg">
   </audio>
 
-  <div class="petals" id="petals"></div>
-
   <script>
     const music = document.getElementById('bgMusic');
-    const petals = document.getElementById('petals');
     const card = document.getElementById('card');
 
+    // Play music after card appears
     card.addEventListener('animationend', (e) => {
       if (e.animationName === 'cardIn') {
-        releasePetals();
         setTimeout(() => music.play().catch(() => {}), 300);
       }
     });
-
-    function releasePetals() {
-      petals.innerHTML = '';
-      for (let i = 0; i < 60; i++) {
-        const petal = document.createElement('div');
-        petal.classList.add('petal');
-        petal.style.left = Math.random() * 100 + 'vw';
-        petal.style.animationDuration = (3 + Math.random() * 2) + 's';
-        petal.style.animationDelay = Math.random() * 0.5 + 's';
-        petals.appendChild(petal);
-      }
-
-      // Stop after 3 seconds
-      setTimeout(() => { petals.innerHTML = ''; }, 3000);
-    }
   </script>
 </body>
 </html>
