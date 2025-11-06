@@ -115,14 +115,16 @@
 
     @keyframes fadeIn { to { opacity: 1; } }
 
-    /* Button */
+    /* Buttons */
     .controls {
       position: relative;
-      bottom: 0;
-      left: 0;
       width: 100%;
       text-align: center;
       margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
       z-index: 10;
     }
 
@@ -139,8 +141,13 @@
       border: 2px solid var(--maroon);
       box-shadow: 0 6px 12px rgba(177, 31, 42, 0.18);
       font-size: 1rem;
+      text-decoration: none;
     }
-    .btn:hover { background: #ffe4e1; }
+
+    .btn:hover {
+      background: #ffe4e1;
+      transform: scale(1.05);
+    }
 
     /* Responsive for mobile */
     @media (max-width: 768px) {
@@ -153,10 +160,6 @@
       .card, .frame {
         max-width: 95%;
         margin-bottom: 20px;
-      }
-
-      .card img, .frame img {
-        border-radius: 15px;
       }
 
       .btn {
@@ -194,10 +197,11 @@
     </div>
   </div>
 
-  <!-- Button -->
+  <!-- Buttons -->
   <div class="controls">
     <a class="btn" target="_blank"
        href="https://www.google.com/maps?q=16.721779173427123,78.00999461311117">📍 Open in Maps</a>
+    <a class="btn" href="tel:+919490909948">📞 Call Us</a>
   </div>
 
   <!-- Music -->
@@ -209,6 +213,7 @@
     const music = document.getElementById('bgMusic');
     const card = document.getElementById('card');
 
+    // Play music after animation
     card.addEventListener('animationend', (e) => {
       if (e.animationName === 'cardIn') {
         setTimeout(() => music.play().catch(() => {}), 300);
